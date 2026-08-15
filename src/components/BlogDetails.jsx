@@ -19,15 +19,15 @@ const BlogDetails = ({}) => {
         <h2 className="text-4xl text-center font-bold">Blogs and News</h2>
         <p className="text-gray-400 text-center text-sm mt-4">Updates | News | Announcements</p>
       </motion.div>
-      <Row gutter={30} justify={"center"}>
-        <Card className="max-w-5xl mb-10! p-0! m-0!">
+      <Row gutter={0} justify={"center"}>
+        <Card className="lg:max-w-5xl mx-4! w-full! mb-10! p-0! m-0!">
           <Button className="border-0! text-amber-600!" onClick={() => {navigate(-1)}}><ArrowLeft /></Button>
-          <div className="w-full! h-120 object-cover overflow-hidden">
+          <div className="w-full! lg:h-120 object-cover overflow-hidden">
             <img src={blog.image} alt={blog.link} className="object-cover object-center w-full h-full" />
           </div>
-          <div className="flex justify-between items-center">
+          <div className="lg:flex justify-between items-center">
           <h2 className="text-xl py-4 font-bold">{blog.title}</h2>
-            <p className="bg-amber-100 p-2 rounded-lg"> <span className="">{blog.date}</span> <span className="">{blog.month.slice(0, 3)}</span> <span>{blog.year}</span></p>
+            <p className="bg-amber-100 p-2 rounded-lg w-fit mb-4 md:mb-4 lg:mb-4"> <span className="">{blog.date}</span> <span className="">{blog.month.slice(0, 3)}</span> <span>{blog.year}</span></p>
           </div>
           <p className="text-gray-400 mb-4">By: {blog.author}</p>
           <p style={{ whiteSpace: "pre-wrap" }}>{blog.news}</p>
