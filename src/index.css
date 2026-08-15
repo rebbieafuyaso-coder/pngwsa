@@ -1,0 +1,29 @@
+@import 'tailwindcss';
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+.bg-img {
+  background: linear-gradient(#000, #fff), url("/pngwsa-members.jpg");
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80vh;
+  z-index: 99;
+}
+@theme {
+  --font-sans: "Montserrat", sans-serif;
+  --font-display: "Inter", sans-serif;
+}
+
+@layer components {
+  .title-text {
+    @apply text-3xl! font-bold!;
+  }
+  .small-title {
+    @apply uppercase text-red-900 font-semibold;
+  }
+  .title {
+    @apply text-4xl font-bold;
+  }
+}
