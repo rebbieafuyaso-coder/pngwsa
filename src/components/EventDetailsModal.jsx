@@ -10,7 +10,7 @@ const EventDetailsModal = ({}) => {
   const event = upcomingEvents.find((event) => event.link === String(link));
   return(
     <>
-      <div className="p-4 mt-4 max-w-6xl mx-auto">
+      <div className="p-4 mt-4 max-w-4 lg:max-w-6xl mx-auto">
         <h2 className="text-4xl mx-auto font-bold">Upcoming Events</h2>
         <p className="text-gray-500">See upcoming events and updates about PNG Wuhan Students Association</p>
       </div>
