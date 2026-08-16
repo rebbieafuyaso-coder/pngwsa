@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AppLayout from '../layout/AppLayout';
 /*
   All pages goes under here
@@ -11,12 +11,15 @@ import CommingSoon from '../pages/CommingSoon';
 import ContactPage from '../pages/ContactPage';
 import EventDetailsModal from '../components/EventDetailsModal';
 import BlogDetails from '../components/BlogDetails';
+import Navbar from '../components/Navbar';
 
 
 export default function AppRoutes() {
   return(
     <>
-      <Routes>
+      <BrowserRouter>
+      <Navbar />
+        <Routes>
         <Route path='/' element={
           <AppLayout>
             <HomePage />
@@ -66,6 +69,7 @@ export default function AppRoutes() {
           </AppLayout>
         } />
       </Routes>
+      </BrowserRouter>
     </>
   )
 }

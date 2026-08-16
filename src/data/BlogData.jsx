@@ -94,7 +94,7 @@ export const executiveProfile = [
   {
     key: 1,
     profilePic: "/profile/Betty-Wakia.png",
-    name: "Dr. Betty Wakia",
+    name: "Betty Wakia",
     school: "Wuhan University of Technology",
     position: "President",
     linkedIn: "/in/betty-wakia-白丽-83721245/"
@@ -276,7 +276,7 @@ export const upcomingEvents = [
 export const alumniData = [
     {
       key: 1,
-      name: "Dr. Betty Wakia (PhD)",
+      name: "Betty Wakia",
       graduationYear: "2017",
       university: "Tianjin University of Science and Education",
       major: "Bachelor in Education",
@@ -312,7 +312,7 @@ export const alumniData = [
     },
     {
       key: 4,
-      name: "Dr. Jeffrey Kunjil (PhD)",
+      name: "Jeffrey Kunjil",
       graduationYear: "2022",
       university: "Wuhan University of Technology",
       major: "Applied Economics",
