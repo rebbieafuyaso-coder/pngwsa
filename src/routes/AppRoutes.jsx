@@ -11,14 +11,12 @@ import CommingSoon from '../pages/CommingSoon';
 import ContactPage from '../pages/ContactPage';
 import EventDetailsModal from '../components/EventDetailsModal';
 import BlogDetails from '../components/BlogDetails';
-import Navbar from '../components/Navbar';
 
 
 export default function AppRoutes() {
   return(
     <>
       <BrowserRouter>
-      <Navbar />
         <Routes>
         <Route path='/' element={
           <AppLayout>
