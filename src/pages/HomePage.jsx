@@ -61,12 +61,13 @@ export default function Homepage() {
   return (
     <>
       <Helmet>
-        <title>Home | PNG WSA</title>
+        <title>Official Website | PNG WSA</title>
         <meta
           name="description"
           content="Welcome to Papua New Guinea Wuhan Students Association where we strive to bring world class education to PNG students"
         />
-        <meta name="og:title" content="Home | PNG WSA" />
+        <meta name="og:title" content="Official Website | PNG Wuhan Students Association" />
+        <meta name="og:description" content="We strive to connect PNG students to Wuhan's top universities." />
       </Helmet>
 
       <main className="overflow-hidden">

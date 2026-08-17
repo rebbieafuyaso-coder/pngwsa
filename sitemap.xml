@@ -4,8 +4,14 @@
 
   <url>
        <loc>https://pngwuhanstudents.netlify.app/</loc>
-       <lastmod>2026-08-15T14:14:26+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>1.0000</priority>
+  </url>
+    <url>
+       <loc>https://pngwuhanstudents.netlify.app/about</loc>
+  </url>
+    <url>
+       <loc>https://pngwuhanstudents.netlify.app/members</loc>
+  </url>
+    <url>
+       <loc>https://pngwuhanstudents.netlify.app/contact</loc>
   </url>
 </urlset>

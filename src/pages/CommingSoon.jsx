@@ -13,6 +13,7 @@ import {
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -67,7 +68,18 @@ const CommingSoon = () => {
   ];
 
   return (
-    <main className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-12">
+    <>
+      <Helmet>
+        <title>Comming Soon</title>
+        <meta
+        name="title"
+        content="Feature comming soon | PNG Wuhan Students Association"
+        />
+        <meta name="description" content="This feature is currently under development and will be nitified upon its release." />
+        <meta name="og:title" content="Feature comming soon." />
+        <meta name="og:description" content="This feature is currently under development and will be nitified upon its release." />
+      </Helmet>
+      <main className="min-h-screen w-full flex items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 px-4 py-12">
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -224,6 +236,7 @@ const CommingSoon = () => {
         </motion.div>
       </motion.div>
     </main>
+    </>
   );
 };
 

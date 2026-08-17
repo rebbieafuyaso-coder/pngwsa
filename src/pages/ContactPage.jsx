@@ -50,9 +50,13 @@ export default function ContactPage() {
           name="description" 
           content="Get in touch with Papua New Guinea Wuhan Students Association. Reach out for inquiries, collaborations, or support." 
         />
+        <meta name="og:title" content="Contact Us | PNG WUhan Students Association" />
+        <meta 
+        name="og:description"
+        content="Contact PNG Wuhans Students Associaiton and find out more any inconvenience or uncertainities." />
       </Helmet>
 
-      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
+      <main className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-12 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <motion.div

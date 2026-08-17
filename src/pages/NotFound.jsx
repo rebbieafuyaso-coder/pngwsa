@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const { Title, Paragraph } = Typography;
 
@@ -50,7 +51,15 @@ const NotFound = () => {
   ];
 
   return (
-    <main className="min-h-[80vh] flex items-center justify-center px-4 bg-linear-to-br from-gray-50 to-gray-100">
+    <>
+      <Helmet>
+        <title>404 | Not Found</title>
+        <meta name="title" content="Page Not Found | PNG Wuhan Students Association" />
+        <meta name="og:title" content="Page Not Found | PNG Wuhan Students Association" />
+        <meta name="description" content="The page you're looking for doesn't exist or is still under developement" />
+        <meta name="og:description" content="The page you're looking for doesn't exist or is still under developement" />
+      </Helmet>
+      <main className="min-h-[80vh] flex items-center justify-center px-4 bg-linear-to-br from-gray-50 to-gray-100">
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -204,6 +213,7 @@ const NotFound = () => {
         </motion.div>
       </motion.div>
     </main>
+    </>
   );
 };
 
