@@ -117,9 +117,9 @@ export default function AboutPage() {
   // Impact Stats
   const stats = [
     { value: "120+", label: "Active Members", icon: FaUsers },
-    { value: "10+", label: "Universities", icon: FaGraduationCap },
-    { value: "5", label: "Years of Growth", icon: FaAward },
-    { value: "50+", label: "Events Hosted", icon: FaStar },
+    { value: "9+", label: "Universities", icon: FaGraduationCap },
+    { value: "12+", label: "Years of Growth", icon: FaAward },
+    { value: "10+", label: "Events Hosted", icon: FaStar },
   ];
 
   return (

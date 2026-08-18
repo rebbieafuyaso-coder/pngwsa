@@ -46,8 +46,8 @@ export default function MembersPage() {
   const memberStats = [
     { title: "Total Members", value: 120, icon: FaUsers, color: "#F59E0B" },
     { title: "Alumni Network", value: 45, icon: FaUserGraduate, color: "#3B82F6" },
-    { title: "Active Students", value: 75, icon: FaGraduationCap, color: "#10B981" },
-    { title: "Awards Won", value: 25, icon: FaTrophy, color: "#8B5CF6" },
+    { title: "Universities", value: 9, icon: FaGraduationCap, color: "#10B981" },
+    { title: "Events Taken Part In", value: 25, icon: FaTrophy, color: "#8B5CF6" },
   ];
 
   return (
@@ -216,17 +216,6 @@ export default function MembersPage() {
                 </motion.div>
               </Col>
             </Row>
-
-            {/* View All Gallery Button */}
-            <motion.div variants={fadeUp} className="text-center mt-8">
-              <Button 
-                className="bg-amber-500 hover:bg-amber-600 border-none text-white rounded-full px-8 h-10 font-medium"
-                onClick={() => window.location.href = '/gallery'}
-              >
-                View Full Gallery
-                <FaArrowRight className="inline ml-2" />
-              </Button>
-            </motion.div>
           </motion.div>
         </section>
 

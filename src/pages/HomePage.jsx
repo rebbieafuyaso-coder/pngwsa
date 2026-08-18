@@ -15,7 +15,6 @@ import {
   FaLinkedin,
   FaFacebook,
   FaYoutube,
-  FaQuoteLeft,
   FaStar,
   FaArrowRight,
   FaCalendarAlt,
@@ -26,8 +25,8 @@ import {
 import HomeHero from "../components/HomeHero";
 import ProfileCards from "../components/ProfileCards";
 import BlogProfile from "../components/BlogProfile";
-import { BlogData, testimonials, upcomingEvents, alumniData } from "../data/BlogData";
-import { ArrowRight } from "lucide-react";
+import { BlogData, upcomingEvents, alumniData } from "../data/BlogData";
+import { TestimonialsCard } from "../components/TestimoniesCard";
 
 const { TextArea } = Input;
 
@@ -50,10 +49,10 @@ export default function Homepage() {
 
   // Quick Stats for hero section
   const quickStats = [
-    { value: "91", label: "Total Members", icon: FaUsers },
+    { value: "120+", label: "Total Members", icon: FaUsers },
     { value: "12+", label: "Years of Service", icon: FaAward },
-    { value: "10+", label: "Partner Universities", icon: FaGraduationCap },
-    { value: "20+", label: "Events Hosted", icon: FaStar },
+    { value: "9+", label: "Partner Universities", icon: FaGraduationCap },
+    { value: "10+", label: "Events Hosted", icon: FaStar },
   ];
 
   const navigate = useNavigate();
@@ -173,8 +172,8 @@ export default function Homepage() {
                         whileHover={{ y: -5 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
-                        <Card className="text-center h-full shadow-lg hover:shadow-xl transition-all duration-300 border-t-4"
-                          style={{ borderTopColor: item.color }}
+                        <Card className="text-center! h-full! shadow-lg! hover:shadow-xl! transition-all duration-300 border-t-4! overflow-hidden!"
+                          style={{ borderTopColor: item.color, }}
                         >
                           <Icon size={40} className="mx-auto mb-3" style={{ color: item.color }} />
                           <p className="text-sm text-gray-700">{item.label}</p>
@@ -209,46 +208,8 @@ export default function Homepage() {
             <Row align="middle" justify="center" gutter={30}
               className="mx-auto"
             >
-              {/**
-              {testimonials.map((testimonial) => (
-                <Col key={testimonial.id} span={6}>
-                  <Card className="text-center p-6 shadow-lg border-none max-w-2xl gap-1 flex">
-                    <div className="flex justify-center mb-4">
-                      <Avatar
-                        size={64}
-                        className="bg-amber-500 flex items-center justify-center text-white font-bold text-xl"
-                      >
-                        {testimonial.avatar}
-                      </Avatar>
-                    </div>
-                    <FaQuoteLeft className="text-amber-300 text-2xl mx-auto mb-3" />
-                    <p className="text-gray-700 text-lg italic leading-relaxed max-w-2xl mx-auto">
-                      "{testimonial.quote}"
-                    </p>
-                    <div className="flex justify-center gap-1 text-amber-400 mt-3">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <FaStar key={i} />
-                      ))}
-                    </div>
-                    <h4 className="font-bold text-gray-900 mt-3">
-                      {testimonial.name}
-                    </h4>
-                    <p className="text-sm text-amber-600">
-                      {testimonial.position}
-                    </p>
-                  </Card>
-                </Col>
-              ))}
-                */}
+              <TestimonialsCard />
             </Row>
-            <div
-            className="text-center mx-auto mt-16"
-            >
-              {/**
-              <Link className="bg-white! rounded-lg! border border-gray-100! mx-auto! p-2! text-black! shadow-lg flex! w-fit! gap-4" to='/members'>See More <ArrowRight /></Link>
-              */}
-              <p className="font-bold text-gray-400">Collecting Data...</p>
-            </div>
           </motion.div>
         </section>
 

@@ -11,12 +11,15 @@ import CommingSoon from '../pages/CommingSoon';
 import ContactPage from '../pages/ContactPage';
 import EventDetailsModal from '../components/EventDetailsModal';
 import BlogDetails from '../components/BlogDetails';
+import AdminLogin from '../auth/AdminLogin';
+import ScrollToTop from '../utils/ScrollToTop';
 
 
 export default function AppRoutes() {
   return(
     <>
       <BrowserRouter>
+      <ScrollToTop />
         <Routes>
         <Route path='/' element={
           <AppLayout>
@@ -66,6 +69,9 @@ export default function AppRoutes() {
             <BlogDetails />
           </AppLayout>
         } />
+
+        {/* Protected Routes goes in here */}
+        <Route path="/private/admin" element={<AdminLogin />} />
       </Routes>
       </BrowserRouter>
     </>

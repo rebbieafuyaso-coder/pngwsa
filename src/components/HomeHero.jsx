@@ -99,16 +99,6 @@ const HomeHero = () => {
             {/* Buttons */}
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">
               <PrimaryBtn label="Learn More" action={() => navigate("/about")} />
-
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => navigate("/join")}
-                className="px-6 py-3 rounded-full font-semibold text-sm text-white border border-white/30 hover:border-yellow-400 hover:text-yellow-400 transition-all duration-300 flex items-center gap-2"
-              >
-                <FaUsers className="text-yellow-400" />
-                Join Now
-              </motion.button>
             </motion.div>
           </motion.div>
         </Col>

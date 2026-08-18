@@ -229,34 +229,6 @@ export const GalleryPreview = {
     }
   ]
 };
-// Testimonials Data
-export const testimonials = [
-    {
-      id: 1,
-      name: "Member's Testimonials",
-      position: "",
-      quote: "Members testimonials are being collected. Stay tuned ",
-      avatar: "",
-      rating: 5,
-    },
-    {
-      id: 2,
-      name: "Member's Testimonials",
-      position: "",
-      quote: "Members testimonials are being collected. Stay tuned ",
-      avatar: "",
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: "Member's Testimonials",
-      position: "",
-      quote: "Members testimonials are being collected. Stay tuned ",
-      avatar: "",
-      rating: 5,
-    },
-  ];     
-  
   /**
    * Events Here
    */
