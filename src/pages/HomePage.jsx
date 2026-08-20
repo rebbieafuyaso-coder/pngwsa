@@ -25,7 +25,9 @@ import {
 import HomeHero from "../components/HomeHero";
 import ProfileCards from "../components/ProfileCards";
 import BlogProfile from "../components/BlogProfile";
-import { BlogData, upcomingEvents, alumniData } from "../data/BlogData";
+import { alumniData } from "../data/alumniData";
+import { upcomingEvents } from "../data/BlogData";
+import { BlogData } from "../data/data";
 import { TestimonialsCard } from "../components/TestimoniesCard";
 
 const { TextArea } = Input;

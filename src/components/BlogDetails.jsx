@@ -1,5 +1,5 @@
 import { Row, Card, Button } from "antd";
-import { BlogData } from "../data/BlogData";
+import { BlogData } from "../data/data";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";

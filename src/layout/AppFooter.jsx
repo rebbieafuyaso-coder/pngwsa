@@ -54,7 +54,7 @@ export default function AppFooter() {
 
   const memberLinks = [
     { label: 'Member Login', path: '/coming-soon' },
-    { label: 'Sign Up', path: '/coming-soon' },
+    { label: 'Sign Up', path: '/members/register' },
     { label: 'Retrieve Account', path: '/coming-soon' },
   ];
 

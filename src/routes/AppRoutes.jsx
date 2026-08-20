@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AppLayout from '../layout/AppLayout';
+import ScrollToTop from '../utils/ScrollToTop';
 /*
   All pages goes under here
 */
@@ -12,7 +13,7 @@ import ContactPage from '../pages/ContactPage';
 import EventDetailsModal from '../components/EventDetailsModal';
 import BlogDetails from '../components/BlogDetails';
 import AdminLogin from '../auth/AdminLogin';
-import ScrollToTop from '../utils/ScrollToTop';
+import AddMembers from '../auth/AddMembers';
 
 
 export default function AppRoutes() {
@@ -72,6 +73,7 @@ export default function AppRoutes() {
 
         {/* Protected Routes goes in here */}
         <Route path="/private/admin" element={<AdminLogin />} />
+        <Route path='/members/register' element={<AddMembers />} />
       </Routes>
       </BrowserRouter>
     </>

@@ -1,12 +1,12 @@
 import { Avatar, Card, Col } from "antd"
 import { FaQuoteLeft } from "react-icons/fa6"
-import { testimonials } from "../data/data"
+import { Testimonials } from "../data/Testimonials";
 import { FaStar } from "react-icons/fa"
 
 export const TestimonialsCard = (e) => {
   return (
     <div>
-      {testimonials.map((testimonial) => (
+      {Testimonials.map((testimonial) => (
       <Col key={testimonial.id} span={24}>
         <Card className="text-center p-6 shadow-lg border-none max-w-2xl gap-1 flex">
           <FaQuoteLeft className="text-amber-300 text-2xl mx-auto mb-3" />

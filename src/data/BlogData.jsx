@@ -1,34 +1,5 @@
 import { FaLightbulb, FaLocationArrow, FaRocket } from "react-icons/fa"
 
-export const BlogData = [
-  {
-    key: 1,
-    image: "/blogs/wut-stem-students.jpg",
-    type: "News",
-    title: "PNGWSA welcomes first batch of STEM students",
-    excerpt: "PNG WSA has welcomed 6 STEM students from the Papua New Guinea STEM scholarship program to study in Wuhan University of Technology",
-    news: 'The Papua New Guinea Wuhan Students Association (PNG WSA) proudly welcomed six students from the Papua New Guinea STEM Scholarship Program, marking a significant milestone in the growing PNG student community in Wuhan.\n\nThe six students are the first cohort of STEM scholarship students to arrive in Wuhan and begin their studies at Wuhan University of Technology (WUT). Their arrival represents more than the beginning of their individual academic journeys—it marks the opening of a new pathway for future Papua New Guinean students seeking world-class education in Wuhan.\n\nFor PNG WSA, this achievement reflects the association’s continued commitment to supporting, connecting, and creating opportunities for Papua New Guinean students in Wuhan. Through persistent engagement and efforts to strengthen connections with Wuhan University of Technology, PNG WSA has worked to help create space for more PNG students to pursue their studies at one of Wuhan’s leading institutions.\n\nThe students travelled from Port Moresby to Guangzhou before continuing to Tianhe International Airport in Wuhan, where they were warmly welcomed by PNG WSA leadership. At the time, President Betty Wakia and Vice President Victor Jima, together with PhD candidate Jeffery Kunjil, received the students and assisted them with their arrival and transition into Wuhan.\n\nFrom the airport, the students were safely guided to Wuhan University of Technology, where they continued with their registration and the next steps of their academic journey.\n\nTheir arrival is a proud moment for PNG WSA and an inspiring beginning for what we hope will become a much larger community of Papua New Guinean STEM students in Wuhan. With more students expected to arrive in 2026, this first group of six has opened the door for many more to follow.\n\nPNG WSA remains committed to welcoming new students, helping them settle into Wuhan, connecting them with the PNG community, and supporting them throughout their academic journey',
-    link: "pngwsa-welcomes-first-batch-of-stem-students",
-    author: "Rebbie Afuyaso",
-    date: "15th",
-    month: "December",
-    year: "2025"
-  },
-  {
-    key: 2,
-    image: "/blogs/wut-executives-officers.jpg",
-    type: "News",
-    title: "PNGWSA continues to secure space for STEM Students",
-    excerpt: "PNG WSA is continously working to secure space for PNG STEM students to study in China's top university.",
-    news: "Following the successful arrival of the first six STEM students at Wuhan University of Technology (WUT), the Papua New Guinea Wuhan Students Association (PNG WSA) continued its efforts to create opportunities for more Papua New Guinean students to study in Wuhan.\n\nAs part of this ongoing effort, PNG WSA welcomed two STEM officers from Papua New Guinea’s National Department of Education, Mr. Peter Mai and Ms. Pogla, who travelled to Wuhan to discuss opportunities for increasing the number of PNG students admitted to WUT in the coming academic year.\n\nRecognising the importance of these discussions, PNG WSA took the initiative to arrange a meeting with the Head of Administration of the university, providing an opportunity for the visiting officers and university representatives to meet, exchange ideas, and discuss the possibility of securing additional study spaces for PNG students.\n\nThe discussions were met with positive feedback and encouraging news, creating greater confidence that more Papua New Guinean students will have the opportunity to pursue their studies at WUT in 2026.\n\nFor PNG WSA, this meeting represents another important step in its commitment to connecting Papua New Guinea with educational opportunities in Wuhan. Beyond welcoming students, the association continues to build relationships, open doors, and advocate for opportunities that can benefit future generations of PNG students.\n\nWith the foundation now being established, PNG WSA looks forward to welcoming more STEM students to Wuhan in 2026 and continuing to strengthen the pathway between PNG students and Wuhan University of Technology.",
-    link: "pngwsa-continues-to-secure-space-for-stem-students",
-    author: "Rebbie Afuyaso",
-    date: "12th",
-    month: "September",
-    year: "2025"
-  }
-]
-
 export const HeroData = {
   about: [
     {
@@ -90,66 +61,7 @@ export const MissionCards = [
   },
 ];
 
-export const executiveProfile = [
-  {
-    key: 1,
-    profilePic: "/profile/Betty-Wakia.png",
-    name: "Betty Wakia",
-    school: "Wuhan University of Technology",
-    position: "President",
-    linkedIn: "/in/betty-wakia-白丽-83721245/"
-  },
-  {
-    key: 2,
-    profilePic: "/profile/Victor-Jima.png",
-    name: "Victor Jima",
-    school: "Wuhan University of Technology",
-    position: "Vice President",
-    linkedIn: "/in/jeffery-kunjil-b6205310a/"
-  },
-  {
-    key: 3,
-    profilePic: "/profile/Rebbie-Afuyaso.jpg",
-    name: "Rebbie Afuyaso",
-    school: "Wuhan University of Technology",
-    position: "IT Coordinator",
-  },
-  {
-    key: 4,
-    profilePic: "/profile/Samuel-Valuka.png",
-    name: "Samuel Valuka",
-    school: "Three Gorges University",
-    position: "CTGU Students Rep",
-  },
-  {
-    key: 5,
-    profilePic: "/profile/Michelle-Kiungu.png",
-    name: "Michelle Kuingu",
-    school: "[Not Known Yet]",
-    position: "Vice President",
-  },
-  {
-    key: 6,
-    profilePic: "/profile/Natasha-Malien.png",
-    name: "Natasha Malien",
-    school: "[Not Known Yet]",
-    position: "Events and Programs Coordinator",
-  },
-  {
-    key: 7,
-    profilePic: "/profile/Macintosh-Milba.png",
-    name: "Macktosh Milba",
-    school: "Three Gorges University",
-    position: "Treasurer",
-  },
-  {
-    key: 8,
-    profilePic: "/profile/Samuel-Awore-Samson.png",
-    name: "Samuel Awora Samson",
-    school: "[Not Known Yet]",
-    position: "Media Coordinator",
-  }
-]
+
 
 // galleryData.js
 export const GalleryPreview = {
@@ -245,53 +157,3 @@ export const upcomingEvents = [
         link: "png-wsa-orientation-bbq",
       },
     ];
-export const alumniData = [
-    {
-      key: 1,
-      name: "Betty Wakia",
-      graduationYear: "2017",
-      university: "Tianjin University of Science and Education",
-      major: "Bachelor in Education",
-      currentJob: "PhD Candidate",
-      currentEmployer: "Wuhan University of Technology",
-      currentLocation: "Wuhan City, Hubei, China",
-      linkedIn: "/in/betty-wakia-白丽-83721245/",
-      profilePic: "/alumni/Betty-Wakia.jpg",
-    },
-    {
-      key: 2,
-      name: "Geraldine Kaupa",
-      graduationYear: "2010",
-      university: "Huazhong University of Science and Technology",
-      major: "Communications and Information Systems",
-      currentJob: "a/First Assistant Secretary - Organizational Strategy Division",
-      currentEmployer: "Department of Finance",
-      currentLocation: "Port Moresby, PNG",
-      linkedIn: "/in/geraldine-kaupa-07891529/",
-      profilePic: "/alumni/Geraldine-Kaupa.jpg",
-    },
-    {
-      key: 3,
-      name: "Ruben Kolomba",
-      graduationYear: "2018",
-      university: "Wuhan University",
-      major: "International Trade",
-      currentJob: "Bank Officer",
-      currentEmployer: "Nationwide MicroBank Limited",
-      currentLocation: "Port Moresby, PNG",
-      linkedIn: "/in/ruben-kolomba-452a6aa9/",
-      profilePic: "/alumni/Ruben-Kolomba.jpg",
-    },
-    {
-      key: 4,
-      name: "Jeffrey Kunjil",
-      graduationYear: "2022",
-      university: "Wuhan University of Technology",
-      major: "Applied Economics",
-      currentJob: "PhD Candidate",
-      currentEmployer: "Self Employed",
-      currentLocation: "Port Moresby, PNG",
-      linkedIn: "/in/jeffery-kunjil-b6205310a/",
-      profilePic: "/alumni/Jeffery-Kunjil.jpeg",
-    }
-  ];

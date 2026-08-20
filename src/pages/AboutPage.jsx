@@ -15,7 +15,8 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 import HeroComponent from "../components/HeroComponent";
-import { executiveProfile, HeroData, MissionCards } from "../data/BlogData";
+import { HeroData, MissionCards } from "../data/BlogData";
+import { executiveProfile } from "../data/executivesProfile";
 import ExecutiveCards from "../components/ExecutiveCards";
 
 // Animation variants
