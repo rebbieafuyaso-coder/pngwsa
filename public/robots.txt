@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap:
-https://pnhwuhanstudents.netlify.app/sitemap.xml
+https://pngwuhanstudents.netlify.app/sitemap.xml
