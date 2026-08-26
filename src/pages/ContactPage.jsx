@@ -54,6 +54,7 @@ export default function ContactPage() {
         <meta 
         name="og:description"
         content="Contact PNG Wuhans Students Associaiton and find out more any inconvenience or uncertainities." />
+        <link rel="canonical" href="https://www.pngwuhanstudents.netlify.app/contact" />
       </Helmet>
 
       <main className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-12 px-4">

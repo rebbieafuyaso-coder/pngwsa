@@ -9,7 +9,19 @@ export default defineConfig({
     react(),
     tailwindcss(),
     sitemapPlugin({
-      hostname: "https://pngwuhanstudents.netlify.app"
+      hostname: "https://pngwuhanstudents.netlify.app",
+
+      dynamicRoutes: [
+        "/",
+        "/about",
+        "/members",
+        "/contact",
+      ],
+
+      exclude: [
+        "/private/admin",
+        "/members/register"
+      ]
     })
   ],
 })

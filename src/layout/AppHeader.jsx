@@ -44,7 +44,7 @@ const AppHeader = () => {
     {
       key: 2,
       icon: <InfoCircleOutlined />,
-      name: "About",
+      name: "About Us",
       path: "/about",
     },
     {

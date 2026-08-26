@@ -69,6 +69,7 @@ export default function Homepage() {
         />
         <meta name="og:title" content="Official Website | PNG Wuhan Students Association" />
         <meta name="og:description" content="We strive to connect PNG students to Wuhan's top universities." />
+        <link rel="canonical" href="https://www.pngwuhanstudents.netlify.app/" />
         <script type="application/ld+json">
           "@context": "https://schema.org",
           "@type": "Website",

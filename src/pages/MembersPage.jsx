@@ -64,6 +64,7 @@ export default function MembersPage() {
           name="og:description" 
           content="Members are the heart of PNG Wuhan Students Association. Serving the students with humility" 
         />
+        <link rel="canonical" href="https://www.pngwuhanstudents.netlify.app/members" />
       </Helmet>
 
       <main className="overflow-hidden">

@@ -315,14 +315,14 @@ const MembersSection = () => {
             transition={{
               duration: 0.6,
             }}
-            className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg shadow-orange-500/20"
+            className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-amber-400 to-orange-500 text-white shadow-lg shadow-orange-500/20"
           >
             <FaUsers size={24} />
           </motion.div>
 
           <Title
             level={1}
-            className="!mb-3 !text-4xl !font-bold !tracking-tight !text-slate-900 md:!text-5xl font-sans!"
+            className="mb-3! text-4xl! font-bold! tracking-tight! text-slate-900! md:text-5xl! font-sans!"
           >
             Member Directory
           </Title>
@@ -424,12 +424,12 @@ const MembersSection = () => {
             <div className="mb-5 flex items-center justify-between">
 
               <div>
-                <Text className="!text-base !font-semibold !text-slate-800">
+                <Text className="text-base! font-semibold! text-slate-800!">
                   Find a Member
                 </Text>
 
                 <div className="mt-1">
-                  <Text className="!text-xs !text-slate-400">
+                  <Text className="!text-xs! text-slate-400!">
                     Search and filter the directory
                   </Text>
                 </div>
@@ -441,7 +441,7 @@ const MembersSection = () => {
                   size="small"
                   icon={<ClearOutlined />}
                   onClick={clearFilters}
-                  className="!text-xs !text-slate-500 hover:!text-orange-500"
+                  className="text-xs! text-slate-500! hover:text-orange-500!"
                 >
                   Clear
                 </Button>
@@ -465,7 +465,7 @@ const MembersSection = () => {
                   }
                   allowClear
                   size="middle"
-                  className="!text-sm"
+                  className="text-sm!"
                 />
               </Col>
 
@@ -476,7 +476,7 @@ const MembersSection = () => {
                   value={filterUniversity}
                   onChange={setFilterUniversity}
                   size="middle"
-                  className="w-full !text-sm"
+                  className="w-full text-sm!"
                   suffixIcon={
                     <BankOutlined className="text-slate-400" />
                   }
@@ -506,7 +506,7 @@ const MembersSection = () => {
                   value={filterGraduateLevel}
                   onChange={setFilterGraduateLevel}
                   size="middle"
-                  className="w-full !text-sm"
+                  className="w-full text-sm!"
                   suffixIcon={
                     <FaGraduationCap className="text-slate-400" />
                   }
@@ -592,7 +592,7 @@ const MembersSection = () => {
             <Tag
               icon={<FilterOutlined />}
               color="orange"
-              className="!rounded-full !text-xs"
+              className="rounded-full! text-xs!"
             >
               Filters active
             </Tag>
@@ -723,7 +723,7 @@ const MembersSection = () => {
 
                       <Title
                         level={4}
-                        className="!mb-1 !text-base !font-semibold !text-slate-800"
+                        className="mb-1! text-base! font-semibold! text-slate-800!"
                       >
                         {member.fullname}
                       </Title>
@@ -732,12 +732,12 @@ const MembersSection = () => {
                         color={getGraduateLevelColor(
                           member.graduateLevel
                         )}
-                        className="!rounded-full !px-3 !text-[11px]"
+                        className="rounded-full! px-3! text-[11px]!"
                       >
                         {member.graduateLevel}
                       </Tag>
 
-                      <Divider className="!my-4" />
+                      <Divider className="my-4!" />
 
                       {/* University */}
 
@@ -750,7 +750,7 @@ const MembersSection = () => {
                             tooltip:
                               member.university,
                           }}
-                          className="!text-xs !text-slate-500"
+                          className="text-xs! text-slate-500!"
                         >
                           {member.university}
                         </Text>
@@ -768,7 +768,7 @@ const MembersSection = () => {
                             tooltip:
                               member.major,
                           }}
-                          className="!text-xs !text-slate-500"
+                          className="text-xs! text-slate-500!"
                         >
                           {member.major}
                         </Text>
@@ -802,11 +802,11 @@ const MembersSection = () => {
               image={Empty.PRESENTED_IMAGE_SIMPLE}
               description={
                 <div>
-                  <Text className="block !text-sm !font-medium !text-slate-700">
+                  <Text className="block text-sm! font-medium! text-slate-700!">
                     No members found
                   </Text>
 
-                  <Text className="!text-xs !text-slate-400">
+                  <Text className="text-xs! text-slate-400!">
                     Try adjusting your search or filters.
                   </Text>
                 </div>
@@ -817,7 +817,7 @@ const MembersSection = () => {
                 type="primary"
                 icon={<ClearOutlined />}
                 onClick={clearFilters}
-                className="!mt-2 !rounded-lg !bg-slate-900"
+                className="mt-2! rounded-lg! bg-slate-900!"
               >
                 Clear Filters
               </Button>

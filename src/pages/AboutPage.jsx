@@ -136,6 +136,7 @@ export default function AboutPage() {
           name="og:description"
           content="Know more about us, meet our teams and Get to know more about our core mission, values and objectives"
         />
+        <link rel="canonical" href="https://www.pngwuhanstudents.netlify.app/about" />
       </Helmet>
 
       <main className="overflow-hidden">
