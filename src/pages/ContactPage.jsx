@@ -184,7 +184,7 @@ export default function ContactPage() {
                   </h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
                         <FaMapMarkerAlt className="text-amber-500" />
                       </div>
                       <div>
@@ -193,102 +193,71 @@ export default function ContactPage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
                         <FaEnvelope className="text-amber-500" />
                       </div>
                       <div>
                         <Text className="font-semibold text-gray-700 block">Email</Text>
                         <a href="mailto:pngwuhanstudentsassociation@gmail.com" className="text-amber-500 text-sm hover:underline">
-                          pngwuhanstudentsassociation@gmail.com
+                          pngwsa.001@gmail.com
                         </a>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
-                        <FaPhone className="text-amber-500" />
-                      </div>
-                      <div>
-                        <Text className="font-semibold text-gray-700 block">Phone</Text>
-                        <a href="tel:+861234567890" className="text-gray-500 text-sm hover:text-amber-500 transition-colors">
-                          +86 123 4567 890
-                        </a>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
-                        <FaClock className="text-amber-500" />
-                      </div>
-                      <div>
-                        <Text className="font-semibold text-gray-700 block">Office Hours</Text>
-                        <Text className="text-gray-500 text-sm">Monday - Friday: 9:00 AM - 5:00 PM</Text>
                       </div>
                     </div>
                   </div>
                 </Card>
 
                 {/* Developer Spotlight Card */}
-                <Card className="shadow-lg rounded-xl border-0 overflow-hidden bg-gradient-to-br from-amber-50 to-amber-100/50">
+                <Card className="shadow-lg rounded-xl border-0 overflow-hidden bg-linear-to-br from-amber-50 to-amber-100/50 mt-4!">
                   <div className="text-center">
                     <div className="relative inline-block">
-                      <Avatar
-                        size={80}
-                        className="border-4 border-white shadow-xl"
+                      <img
+                        src="/member-profiles/Rebbie-Afuyaso.webp"
+                        width={150}
+                        className="border-4 border-white shadow-xl rounded-full align-middle items-center"
                         style={{ backgroundColor: '#D97706' }}
-                      >
-                        <span className="text-2xl font-bold text-white">RA</span>
-                      </Avatar>
-                      <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white" />
+                      />
                     </div>
                     
-                    <h3 className="text-lg font-bold text-gray-900 mt-3">
+                    <h3 className="text-lg font-bold text-gray-900 mt-3 font-sans">
                       Rebbie Afuyaso
                     </h3>
-                    <Text className="text-amber-600 text-sm font-medium block">
+                    <Text className="text-amber-600 text-sm font-medium block font-display!">
                       Lead Developer &amp; Webmaster
                     </Text>
                     
                     <Divider className="my-3" />
                     
-                    <Text className="text-gray-600 text-sm block">
+                    <Text className="text-gray-600 text-sm block font-sans!">
                       Built and maintained this website. For technical issues or 
                       collaboration opportunities, feel free to reach out.
                     </Text>
 
                     <div className="flex flex-wrap justify-center gap-2 mt-4">
                       <a
-                        href="mailto:rebbie@pngwsa.com"
+                        href="mailto:rebbieafuyaso.001@gmail.com"
                         className="w-9 h-9 rounded-full bg-amber-500 text-white flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-lg"
                         aria-label="Email"
                       >
                         <FaEnvelope className="text-sm" />
                       </a>
                       <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-lg"
-                        aria-label="WhatsApp"
-                      >
-                        <FaWhatsapp className="text-sm" />
-                      </a>
-                      <a
-                        href="#"
+                        href="https://www.linkedin.com/in/rebbie-afuyaso/"
                         className="w-9 h-9 rounded-full bg-[#0A66C2] text-white flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-lg"
                         aria-label="LinkedIn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        
                       >
                         <FaLinkedin className="text-sm" />
                       </a>
                       <a
-                        href="#"
+                        href="https://github.com/rebbieafuyaso-coder/"
                         className="w-9 h-9 rounded-full bg-[#24292E] text-white flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-lg"
                         aria-label="GitHub"
+                        target="_blank"
+                        rel="nooopener noreferrer"
                       >
                         <FaGithub className="text-sm" />
-                      </a>
-                      <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-lg"
-                        aria-label="Twitter"
-                      >
-                        <FaTwitter className="text-sm" />
                       </a>
                     </div>
 
@@ -301,32 +270,6 @@ export default function ContactPage() {
                   </div>
                 </Card>
 
-                {/* Social Links */}
-                <Card className="shadow-lg rounded-xl border-0">
-                  <h3 className="text-sm font-semibold text-gray-700 mb-3 text-center">
-                    Follow PNGWSA
-                  </h3>
-                  <div className="flex justify-center gap-4">
-                    <a
-                      href="#"
-                      className="text-gray-400 hover:text-[#0A66C2] transition-all duration-300 hover:scale-110"
-                    >
-                      <FaLinkedin className="text-2xl" />
-                    </a>
-                    <a
-                      href="#"
-                      className="text-gray-400 hover:text-[#1877F2] transition-all duration-300 hover:scale-110"
-                    >
-                      <FaFacebook className="text-2xl" />
-                    </a>
-                    <a
-                      href="#"
-                      className="text-gray-400 hover:text-[#FF0000] transition-all duration-300 hover:scale-110"
-                    >
-                      <FaYoutube className="text-2xl" />
-                    </a>
-                  </div>
-                </Card>
               </motion.div>
             </Col>
           </Row>
