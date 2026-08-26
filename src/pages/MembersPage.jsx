@@ -17,6 +17,7 @@ import {
 import HeroComponent from "../components/HeroComponent";
 import GalleryCard from "../components/GalleryCard";
 import { GalleryPreview, HeroData } from "../data/BlogData";
+import MembersSection from "./MembersSection";
 
 const { 
   academic, 
@@ -241,61 +242,16 @@ export default function MembersPage() {
             </motion.div>
             <p className="text-center font-bold">Directory Comming Soon</p>
             <motion.div variants={fadeUp} className="text-center mt-8">
-              <Button 
-                className="border-amber-500 text-amber-500 hover:bg-amber-50 rounded-full px-8 h-10 font-medium"
-                onClick={() => window.location.href = '/alumni'}
-              >
-                View All Alumni
-                <FaArrowRight className="inline ml-2" />
-              </Button>
+              
             </motion.div>
           </motion.div>
         </section>
 
         {/* Members Data Section */}
         <section className="py-16 px-4 md:px-16">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.div variants={fadeUp} className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Member Directory
-              </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Our loyal members are the heart of our association. Every event
-                and activity is tailored to make sure they feel at home and
-                enjoy their stay in Wuhan, China.
-              </p>
-            </motion.div>
 
-            <Row gutter={[24, 24]} justify="center">
-              <Col xs={24} sm={16} md={12} lg={8}>
-                <motion.div variants={fadeUp}>
-                  <Card className="text-center py-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-dashed border-gray-300">
-                    <div className="flex items-center justify-center gap-4 p-6 bg-gray-50 rounded-full w-fit mx-auto">
-                      <FaUsers className="text-5xl text-amber-500" />
-                      <span className="text-5xl font-light text-gray-400">+</span>
-                      <FaGraduationCap className="text-5xl text-amber-500" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mt-4">
-                      Member Directory Coming Soon
-                    </h3>
-                    <p className="text-gray-500 mt-2 max-w-xs mx-auto">
-                      We are currently collecting and organizing student data.
-                      The full member directory will be available soon.
-                    </p>
-                    <Tag color="gold" className="mt-3">
-                      <FaCalendarAlt className="inline mr-1" />
-                      Expected: Q2 2026
-                    </Tag>
-                  </Card>
-                </motion.div>
-              </Col>
-            </Row>
-          </motion.div>
+          <MembersSection />
+
         </section>
       </main>
     </>

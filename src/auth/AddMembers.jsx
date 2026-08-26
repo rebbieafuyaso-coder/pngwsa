@@ -145,10 +145,11 @@ const AddMembers = () => {
         }}
       >
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <Title level={2} style={{ margin: 0, color: '#1a1a2e' }}>
+          <img src="/papua-new-guinea-wuhan-students-association-logo.png" alt="Wuhan students logo"  width={200} height={200} className="mx-auto rounded-full border-4 border-amber-500"/>
+          <Title level={2} style={{ margin: 0, color: '#1a1a2e' }} className="font-display!">
             PNG WSA Member Registration
           </Title>
-          <Text type="secondary" style={{ fontSize: 16 }}>
+          <Text type="secondary" style={{ fontSize: 16 }} className="font-sans!">
             Join the Papua New Guinea Women in STEM Association
           </Text>
           <Divider style={{ marginTop: 16 }} />
@@ -171,11 +172,11 @@ const AddMembers = () => {
                 valuePropName="fileList"
                 getValueFromEvent={(e) => e.fileList}
               >
-                <Upload {...uploadProps}>
+                <Upload className="mx-10!" {...uploadProps}>
                   {fileList.length === 0 && (
-                    <div>
-                      <PlusOutlined style={{ fontSize: 24 }} />
-                      <div style={{ marginTop: 8 }}>Upload Photo</div>
+                    <div className="p-10!">
+                      <PlusOutlined style={{ fontSize: 24 }} className="text-blue-500!" />
+                      <div style={{ marginTop: 8 }} className="text-blue-500">Upload Photo</div>
                     </div>
                   )}
                 </Upload>
@@ -196,8 +197,8 @@ const AddMembers = () => {
                     name="name"
                     rules={[
                       { required: true, message: "Please enter your full name" },
-                      { min: 2, message: "Name must be at least 2 characters" },
-                      { max: 100, message: "Name must not exceed 100 characters" }
+                      { min: 3, message: "Name must be at least 2 characters" },
+                      { max: 20, message: "Name must not exceed 20 characters" }
                     ]}
                     tooltip="Enter your full legal name as it appears on official documents"
                   >

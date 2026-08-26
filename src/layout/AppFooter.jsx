@@ -48,7 +48,6 @@ export default function AppFooter() {
     { label: 'Home', path: '/' },
     { label: 'About Us', path: '/about' },
     { label: 'Members', path: '/members' },
-    { label: 'News & Events', path: '/news-events' },
     { label: 'Contact', path: '/contact' },
   ];
 
@@ -105,19 +104,19 @@ export default function AppFooter() {
                 <div className="flex items-center gap-2 text-gray-400">
                   <FaEnvelope className="text-amber-400 flex-shrink-0" />
                   <a
-                    href="mailto:pngwuhanstudentsassociation@gmail.com"
+                    href="mailto:pngwsa.001@gmail.com"
                     className="hover:text-amber-400 transition-colors"
                   >
-                    pngwuhanstudentsassociation@gmail.com
+                    pngwsa.001@gmal.com
                   </a>
                 </div>
                 <div className="flex items-center gap-2 text-gray-400">
                   <FaPhone className="text-amber-400 flex-shrink-0" />
                   <a
-                    href="tel:+861234567890"
+                    href="tel:+8613072715926"
                     className="hover:text-amber-400 transition-colors"
                   >
-                    +86 123 4567 890
+                    +86 130 7271 5926
                   </a>
                 </div>
               </div>

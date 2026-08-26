@@ -73,7 +73,10 @@ export default function AppRoutes() {
 
         {/* Protected Routes goes in here */}
         <Route path="/private/admin" element={<AdminLogin />} />
-        <Route path='/members/register' element={<AddMembers />} />
+        <Route path='/members/register' element={
+          <AppLayout>
+            <AddMembers />
+          </AppLayout>} />
       </Routes>
       </BrowserRouter>
     </>
