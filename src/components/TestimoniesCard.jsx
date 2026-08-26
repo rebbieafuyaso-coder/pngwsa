@@ -54,7 +54,7 @@ export const TestimonialsCard = () => {
           {Testimonials.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
               <Card 
-                className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-none h-full flex flex-col min-h-4xl!"
+                className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-none h-full flex flex-col min-h-6xl!"
                 style={{ borderRadius: '16px' }}
               >
                 <div className="flex-1">
