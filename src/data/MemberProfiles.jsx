@@ -95,4 +95,12 @@ export const MemberProfiles = [
     linkedIn: "rebbie-afuyaso",
     profile: "/member-profiles/Rebbie-Afuyaso.webp",
   },
+  {
+  fullname: "Darren Orawi",
+  university: "Wuhan University of Technology",
+  major: "Mechanical Engineering",
+  graduateLevel: "Undergraduate",
+  linkedIn: "darren-orawi-647634248",
+  profile: "/member-profiles/Darren-Orawi.jpg",
+},
 ]
