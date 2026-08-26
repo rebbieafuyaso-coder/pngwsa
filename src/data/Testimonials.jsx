@@ -5,5 +5,47 @@ export const Testimonials = [
     role: "Executive 2026",
     quote: "For me, PNG WSA is more than just a student-led association; it is more like a home away from home. Since my arrival, PNG WSA has played a big part in making sure we get registered and settled in for our studies. I have also met some great student leaders and made new friends through PNG WSA, friendships that I believe will stay with me for the rest of my life.\n\n\nPNG WSA has helped me overcome homesickness and introduced me to the world of China. I am truly grateful for the support, friendships, and experiences that PNG WSA has given me.",
     rating: 4,
-  }
+  },
+  {
+    id: 2,
+    name: "Victor Jima",
+    role: "Executive 2026",
+    quote: "The association helps me connect with delegates and scholars from different backgrounds and knowledge. It also serves as a cornerstone to mould me to collaborate with several stakeholders and institutions throughout the global stage to enhances my understanding and confidence in practical solution",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: "Diona Kingi",
+    role: "Member 2026",
+    quote: "Through the PNG WSA, I have truly made a family here in China. Beyond the warmth and belonging, the association keeps me practically grounded with timely messages from the embassy and news from back home, ensuring I always feel safe and connected.",
+    rating: 4,
+  },
+  {
+    id: 4,
+    name: "Nema Johny",
+    role: "Member 2026",
+    quote: "The PNG Wuhan Students Association is a true lifesaver. Whether it's academic pressure or daily living challenges in Wuhan, they consistently step up to support one another. Their collective strength and kindness make me feel safe and supported. They are family to me.",
+    rating: 5,
+  },
+  {
+    id: 5,
+    name: "Diona Kingi",
+    role: "Member 2026",
+    quote: "Through the PNG WSA, I have truly made a family here in China. Beyond the warmth and belonging, the association keeps me practically grounded with timely messages from the embassy and news from back home, ensuring I always feel safe and connected.",
+    rating: 4,
+  },
+  {
+    id: 6,
+    name: "Ezekiel Inni",
+    role: "Member 2024",
+    quote: "The warmth and readiness to assist from every member have made a significant difference, turning potential hurdles into manageable steps. I am truly grateful for their constant helpfulness and the family-like environment they've created here.",
+    rating: 4,
+  },
+  {
+    id: 7,
+    name: "Natalie Kumbia",
+    role: "Member 2026",
+    quote: "PNG WSA is being very helpful in many different ways; such as picking us from the airport,  showing around the university, setting up our Chinese apps and etc.",
+    rating: 4,
+  },
 ]
