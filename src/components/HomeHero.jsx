@@ -83,7 +83,7 @@ const HomeHero = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 <span className="text-white">Papua New Guinea</span>
                 <br />
-                <span className="text-yellow-400">Wuhan Students Association</span>
+                <span className="text-yellow-400">Hubei Students Association</span>
               </h1>
             </motion.div>
 
@@ -93,7 +93,7 @@ const HomeHero = () => {
               className="text-base md:text-lg text-gray-300 max-w-xl py-6 leading-relaxed"
             >
               Connecting, empowering, and supporting PNG students pursuing
-              excellence in Wuhan's top universities.
+              excellence in Hubei's top universities.
             </motion.p>
 
             {/* Buttons */}

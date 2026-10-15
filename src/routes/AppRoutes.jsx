@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 import AppLayout from "../layout/AppLayout";
 import ScrollToTop from "../utils/ScrollToTop";
@@ -13,89 +13,74 @@ import NotFound from "../pages/NotFound";
 import EventDetailsModal from "../components/EventDetailsModal";
 import BlogDetails from "../components/BlogDetails";
 
-import AdminLogin from "../auth/AdminLogin";
+import AdminLogin from "../admin/AdminLogin";
 import AddMembers from "../auth/AddMembers";
+import AuthPage from "../auth/AuthPage";
+
+import { AuthProvider } from "../auth/AuthContext";
+import ProtectedRoute from "../routes/ProtectedRoutes";
+
+import AdminLayout from "../admin/AdminLayout";
+import Dashboard from "../admin/Dashboard";
+import Events from "../admin/Events";
+import Blogs from "../admin/Blogs";
+import Alumni from "../admin/Alumni";
+import Gallery from "../admin/Gallery";
 
 export default function AppRoutes() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
+    <AuthProvider>
+      <BrowserRouter>
+        <ScrollToTop />
 
-      <Routes>
+        <Routes>
+          {/* =========================================
+              PUBLIC WEBSITE
+          ========================================= */}
 
-        {/* =========================================
-            PUBLIC WEBSITE
-        ========================================= */}
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/members" element={<MembersPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/coming-soon" element={<ComingSoon />} />
+            <Route path="/events/:link" element={<EventDetailsModal />} />
+            <Route path="/blogs" element={<ComingSoon />} />
+            <Route path="/blogs/:link" element={<BlogDetails />} />
 
-        <Route element={<AppLayout />}>
+            <Route path="/members/register" element={<AddMembers />} />
+            <Route path="/members/login" element={<AuthPage />} />
 
-          <Route
-            path="/"
-            element={<HomePage />}
-          />
+            <Route path="*" element={<NotFound />} />
+          </Route>
 
-          <Route
-            path="/about"
-            element={<AboutPage />}
-          />
+          {/* =========================================
+              ADMIN LOGIN (no public layout wrapper)
+          ========================================= */}
 
-          <Route
-            path="/members"
-            element={<MembersPage />}
-          />
+          <Route path="/admin/login" element={<AdminLogin />} />
 
-          <Route
-            path="/contact"
-            element={<ContactPage />}
-          />
-
-          <Route
-            path="/coming-soon"
-            element={<ComingSoon />}
-          />
-
-          <Route
-            path="/events/:link"
-            element={<EventDetailsModal />}
-          />
+          {/* =========================================
+              ADMIN PROTECTED AREA
+          ========================================= */}
 
           <Route
-            path="/blogs"
-            element={<ComingSoon />}
-          />
-
-          <Route
-            path="/blogs/:link"
-            element={<BlogDetails />}
-          />
-
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
-
-        </Route>
-
-
-        {/* =========================================
-            ADMIN / PRIVATE
-        ========================================= */}
-
-        <Route
-          path="/private/admin"
-          element={<AdminLogin />}
-        />
-
-        <Route
-          path="/members/register"
-          element={
-            <AppLayout>
-              <AddMembers />
-            </AppLayout>
-          }
-        />
-
-      </Routes>
-    </BrowserRouter>
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="events" element={<Events />} />
+            <Route path="blogs" element={<Blogs />} />
+            <Route path="alumni" element={<Alumni />} />
+            <Route path="gallery" element={<Gallery />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }

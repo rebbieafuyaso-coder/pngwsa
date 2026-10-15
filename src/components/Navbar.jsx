@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 function Navbar() {
   return(
     <nav>
-      <h1>PNG Wuhan Students Association</h1>
+      <h1>PNG Hubei Students Association</h1>
       <div>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>

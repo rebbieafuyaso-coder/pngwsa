@@ -68,12 +68,12 @@ const AppHeader = () => {
         <div className="flex items-center font-sans gap-3">
           <img 
             src="/papua-new-guinea-wuhan-students-association-logo.png" 
-            alt="PNGWSA Logo"
+            alt="PNGHSA Logo"
             className="w-12 h-12 object-contain"
           />
           <div>
             <p className="text-base font-semibold text-white">Papua New Guinea</p>
-            <p className="text-xs text-gray-400">Wuhan Students Association</p>
+            <p className="text-xs text-gray-400">Hubei Students Association</p>
           </div>
         </div>
 

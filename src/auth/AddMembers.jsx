@@ -1,230 +1,358 @@
-import { Form, Input, message, Select, Button, Card, Row, Col, Upload, Avatar, Space, Divider, Typography, Alert } from "antd";
+import {
+  Form,
+  Input,
+  message,
+  Select,
+  Button,
+  Card,
+  Row,
+  Col,
+  Upload,
+  Avatar,
+  Divider,
+  Typography,
+  Alert,
+  Progress,
+} from "antd";
 import { useForm } from "antd/es/form/Form";
-import { useState } from "react";
-import { 
-  UserOutlined, 
-  MailOutlined, 
-  PlusOutlined, 
+import { useState, useCallback } from "react";
+import {
+  UserOutlined,
+  MailOutlined,
   UploadOutlined,
   LinkedinOutlined,
-  CloseCircleOutlined,
-  CheckCircleOutlined
+  CheckCircleOutlined,
+  LoadingOutlined,
+  IdcardOutlined,
+  BankOutlined,
+  BookOutlined,
+  SafetyCertificateOutlined,
+  EnvironmentOutlined,
 } from "@ant-design/icons";
+import { supabase } from "../supabaseClient";
+import ImageCropModal from "../components/ImageCropModal";
+import { Helmet } from "react-helmet-async";
 
 const { Option } = Select;
-const { Title, Text } = Typography;
+const { Title, Text, Paragraph } = Typography;
+
+const MAX_FILE_SIZE_MB = 5;
+const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+const MAX_NAME_LENGTH = 50;
+const MIN_NAME_LENGTH = 2;
 
 const AddMembers = () => {
   const [form] = useForm();
-  const [uploading, setUploading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [preview, setPreview] = useState(null);
   const [fileList, setFileList] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [cropOpen, setCropOpen] = useState(false);
+  const [cropImage, setCropImage] = useState(null);
 
-  // Handle file upload change
-  const handleFileChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-    
-    // Generate preview
-    if (newFileList.length > 0 && newFileList[0].originFileObj) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setPreview(e.target.result);
-      };
-      reader.readAsDataURL(newFileList[0].originFileObj);
-    } else {
-      setPreview(null);
+  const beforeUpload = useCallback((file) => {
+    if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+      message.error("Please upload a valid image (JPEG, PNG, WebP, or GIF)");
+      return Upload.LIST_IGNORE;
     }
-  };
+    if (file.size / 1024 / 1024 >= MAX_FILE_SIZE_MB) {
+      message.error(`Image must be smaller than ${MAX_FILE_SIZE_MB}MB`);
+      return Upload.LIST_IGNORE;
+    }
 
-  // Handle file removal
-  const handleRemoveFile = () => {
+    // Read the file as a data URL, then open the crop modal
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setCropImage(e.target.result);
+      setCropOpen(true);
+    };
+    reader.readAsDataURL(file);
+
+    // Block AntD's automatic upload — we handle it manually
+    return Upload.LIST_IGNORE;
+  }, []);
+
+  const handleCropConfirm = useCallback(
+    (croppedFile) => {
+      const newFile = {
+        uid: `${Date.now()}`,
+        name: croppedFile.name,
+        status: "done",
+        originFileObj: croppedFile,
+        url: URL.createObjectURL(croppedFile),
+      };
+      setFileList([newFile]);
+      setPreview(URL.createObjectURL(croppedFile));
+      form.setFieldValue("profile_picture", [newFile]);
+      setCropOpen(false);
+      setCropImage(null);
+    },
+    [form]
+  );
+
+  const handleCropCancel = useCallback(() => {
+    setCropOpen(false);
+    setCropImage(null);
+  }, []);
+
+  const handleRemoveFile = useCallback(() => {
     setFileList([]);
     setPreview(null);
-    form.setFieldValue('profile_picture', null);
+    form.setFieldValue("profile_picture", undefined);
+  }, [form]);
+
+  // Upload avatar to Supabase Storage
+  const uploadAvatar = async (file) => {
+    setUploadProgress(20);
+    const ext = file.name.split(".").pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const filePath = `pending/${fileName}`;
+
+    setUploadProgress(50);
+
+    const { error: uploadError } = await supabase.storage
+      .from("avatars")
+      .upload(filePath, file, {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: file.type,
+      });
+
+    if (uploadError) throw new Error(uploadError.message);
+
+    setUploadProgress(90);
+
+    const { data: urlData } = supabase.storage
+      .from("avatars")
+      .getPublicUrl(filePath);
+
+    setUploadProgress(100);
+    return urlData.publicUrl;
   };
 
-  // Form submission
   const handleSubmit = async (values) => {
-    setUploading(true);
+    setSubmitting(true);
+    setUploadProgress(0);
+
     try {
-      let profilePictureUrl = null;
+      let avatarUrl = null;
 
-      // Upload image to Cloudflare backend
-      if (values.profile_picture?.fileList?.length > 0) {
-        const file = values.profile_picture.fileList[0].originFileObj;
-        const formData = new FormData();
-        formData.append("file", file);
-
-        const uploadResponse = await fetch("/api/upload-profile-picture", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (!uploadResponse.ok) {
-          const errorData = await uploadResponse.json();
-          throw new Error(errorData.message || "Failed to upload profile picture.");
-        }
-        
-        const uploadData = await uploadResponse.json();
-        profilePictureUrl = uploadData.url;
+      if (values.profile_picture?.length > 0) {
+        const file = values.profile_picture[0].originFileObj;
+        avatarUrl = await uploadAvatar(file);
       }
 
-      // Prepare profile data for Supabase
-      const profileData = {
-        name: values.name,
-        email: values.email,
-        university: values.university,
-        major: values.major,
+      // Insert directly into members table
+      const { error } = await supabase.from("members").insert({
+        fullname: values.fullname.trim(),
+        email: values.email.trim().toLowerCase(),
+        university: values.university?.trim() || null,
+        course: values.course?.trim() || null,
         graduate_level: values.graduate_level,
-        profile_picture_url: profilePictureUrl,
-        linkedin_url: values.linkedin_url || null,
-      };
+        city: values.city?.trim() || null,
+        linkedin_url: values.linkedin_url?.trim() || null,
+        avatar_url: avatarUrl,
+      });
 
-      console.log("Profile Data:", profileData);
-
-      // Here you would send to your API/Supabase
-      // const response = await api.post('/api/members', profileData);
+      if (error) throw new Error(error.message);
 
       message.success({
-        content: "Profile created successfully!",
-        icon: <CheckCircleOutlined style={{ color: '#52c41a' }} />,
-        duration: 3,
+        content: "Member registered successfully!",
+        icon: <CheckCircleOutlined style={{ color: "#52c41a" }} />,
+        duration: 4,
       });
-      
+
       form.resetFields();
       setPreview(null);
       setFileList([]);
+      setUploadProgress(0);
     } catch (error) {
-      console.error("Error creating profile:", error);
+      console.error("Error creating member:", error);
       message.error({
-        content: error.message || "Something went wrong",
-        icon: <CloseCircleOutlined style={{ color: '#ff4d4f' }} />,
-        duration: 3,
+        content: error.message || "Something went wrong. Please try again.",
+        duration: 4,
       });
     } finally {
-      setUploading(false);
+      setSubmitting(false);
     }
   };
 
-  // Upload props configuration
   const uploadProps = {
-    listType: 'picture-card',
+    listType: "picture-card",
     fileList,
-    onChange: handleFileChange,
-    onRemove: handleRemoveFile,
-    beforeUpload: (file) => {
-      const isImage = file.type.startsWith('image/');
-      if (!isImage) {
-        message.error('Please upload an image file');
-        return false;
-      }
-      const isLt5MB = file.size / 1024 / 1024 < 5;
-      if (!isLt5MB) {
-        message.error('Image must be smaller than 5MB');
-        return false;
-      }
-      return false; // Prevent auto upload
+    onChange: ({ fileList: newFileList }) => {
+      // Block direct changes; only crop confirm updates the list
+      if (newFileList.length === 0) handleRemoveFile();
     },
-    accept: 'image/jpeg,image/png,image/webp,image/gif',
+    onRemove: handleRemoveFile,
+    beforeUpload,
+    accept: ALLOWED_FILE_TYPES.join(","),
     maxCount: 1,
+    disabled: submitting,
+    showUploadList: { showPreviewIcon: true, showRemoveIcon: !submitting },
   };
 
   return (
-    <div style={{ 
-      maxWidth: 800, 
-      margin: '0 auto', 
-      padding: '24px',
-      minHeight: '100vh',
-      background: '#f0f2f5'
-    }}>
-      <Card 
-        bordered={false}
-        style={{ 
-          borderRadius: '12px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+    <>
+    <Helmet>
+      <title>PNG HSA | Register</title>
+      <meta name="description" content="Register as a Member for PNG HSA" />
+    </Helmet>
+    <div style={{ maxWidth: 820, margin: "24px auto", padding: "0 16px" }}>
+      <Card
+        variant="border"
+        style={{
+          borderRadius: 14,
+          boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
         }}
+        styles={{ body: { padding: "24px 28px" } }}
       >
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <img src="/papua-new-guinea-wuhan-students-association-logo.png" alt="Wuhan students logo"  width={200} height={200} className="mx-auto rounded-full border-4 border-amber-500"/>
-          <Title level={2} style={{ margin: 0, color: '#1a1a2e' }} className="font-display!">
-            PNG WSA Member Registration
-          </Title>
-          <Text type="secondary" style={{ fontSize: 16 }} className="font-sans!">
-            Join the Papua New Guinea Women in STEM Association
-          </Text>
-          <Divider style={{ marginTop: 16 }} />
+        {/* Compact header */}
+        <div
+          style={{ textAlign: "center", marginBottom: 20 }}
+          className="flex max-w-full items-center justify-around p-4"
+        >
+          <div className="justify-center self-center flex">
+            <Avatar
+              size={100}
+              src="/papua-new-guinea-wuhan-students-association-logo.png"
+              style={{ border: "3px solid #f59e0b", marginBottom: 10 }}
+            >
+              PNG
+            </Avatar>
+          </div>
+          <div className="max-w-full text-left!">
+            <Title
+              level={4}
+              style={{ margin: 0, color: "#1a1a2e" }}
+              className="font-display!"
+            >
+              PNG HSA Member Registration
+            </Title>
+            <Paragraph
+              type="secondary"
+              style={{ fontSize: 13, margin: "4px 0 0" }}
+              className="font-sans!"
+            >
+              Register a new member — credentials will be emailed automatically
+            </Paragraph>
+          </div>
         </div>
+
+        <Divider />
 
         <Form
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
           autoComplete="off"
-          requiredMark="optional"
-          size="large"
+          requiredMark={false}
+          size="middle"
+          scrollToFirstError
         >
-          <Row gutter={24}>
-            {/* Profile Picture Upload */}
-            <Col xs={24} md={8}>
+          <Row gutter={20}>
+            {/* Avatar */}
+            <Col xs={24} md={7}>
               <Form.Item
                 name="profile_picture"
-                label="Profile Picture"
+                label="Profile Photo"
                 valuePropName="fileList"
-                getValueFromEvent={(e) => e.fileList}
+                getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
+                rules={[{ required: true, message: "Please upload a photo" }]}
+                style={{ marginBottom: 8 }}
               >
-                <Upload className="mx-10!" {...uploadProps}>
+                <Upload {...uploadProps}>
                   {fileList.length === 0 && (
-                    <div className="p-10!">
-                      <PlusOutlined style={{ fontSize: 24 }} className="text-blue-500!" />
-                      <div style={{ marginTop: 8 }} className="text-blue-500">Upload Photo</div>
+                    <div style={{ padding: "12px 4px", textAlign: "center" }}>
+                      <UploadOutlined style={{ fontSize: 20, color: "#1677ff" }} />
+                      <div
+                        style={{ fontSize: 12, color: "#1677ff", marginTop: 4 }}
+                      >
+                        Upload Profile Pic
+                      </div>
                     </div>
                   )}
                 </Upload>
               </Form.Item>
-              {preview && (
-                <div style={{ marginTop: 8, textAlign: 'center' }}>
-                  <Avatar size={64} src={preview} />
-                </div>
+              <Text type="secondary" style={{ fontSize: 11 }}>
+                JPG, PNG, WebP · Max 5MB
+              </Text>
+              {uploadProgress > 0 && uploadProgress < 100 && (
+                <Progress
+                  percent={uploadProgress}
+                  size="small"
+                  strokeColor="#1677ff"
+                />
               )}
             </Col>
 
-            {/* Personal Information */}
-            <Col xs={24} md={16}>
+            {/* Core fields */}
+            <Col xs={24} md={17}>
               <Row gutter={16}>
                 <Col xs={24}>
                   <Form.Item
                     label="Full Name"
-                    name="name"
+                    name="fullname"
                     rules={[
-                      { required: true, message: "Please enter your full name" },
-                      { min: 3, message: "Name must be at least 2 characters" },
-                      { max: 20, message: "Name must not exceed 20 characters" }
+                      { required: true, message: "Please enter full name" },
+                      {
+                        min: MIN_NAME_LENGTH,
+                        message: `Min ${MIN_NAME_LENGTH} characters`,
+                      },
+                      {
+                        max: MAX_NAME_LENGTH,
+                        message: `Max ${MAX_NAME_LENGTH} characters`,
+                      },
+                      {
+                        pattern: /^[a-zA-Z\s'-]+$/,
+                        message: "Only letters, spaces, hyphens, apostrophes",
+                      },
                     ]}
-                    tooltip="Enter your full legal name as it appears on official documents"
+                    style={{ marginBottom: 14 }}
                   >
-                    <Input 
-                      prefix={<UserOutlined />} 
-                      placeholder="Enter your full name" 
-                      size="large"
+                    <Input
+                      className="border border-gray-200!"
+                      classNames={{ input: "text-gray-700! font-sans!" }}
+                      prefix={<UserOutlined style={{ color: "#9ca3af" }} />}
+                      placeholder="Full name"
+                      disabled={submitting}
+                      maxLength={MAX_NAME_LENGTH}
                     />
                   </Form.Item>
                 </Col>
-              </Row>
 
-              <Row gutter={16}>
                 <Col xs={24}>
                   <Form.Item
-                    label="Email Address"
-                    name="email"
+                    label="University"
+                    name="university"
                     rules={[
-                      { required: true, message: "Please enter your email" },
-                      { type: 'email', message: "Please enter a valid email address" }
+                      { required: true, message: "Please enter university" },
                     ]}
+                    style={{ marginBottom: 14 }}
                   >
-                    <Input 
-                      prefix={<MailOutlined />} 
-                      placeholder="joeblow@example.com" 
-                      size="large"
+                    <Input
+                      className="border border-gray-200!"
+                      classNames={{ input: "text-gray-700! font-sans!" }}
+                      prefix={<BankOutlined style={{ color: "#9ca3af" }} />}
+                      placeholder="e.g Wuhan University of Technology"
+                      disabled={submitting}
+                    />
+                  </Form.Item>
+                </Col>
+
+                <Col xs={24}>
+                  <Form.Item
+                    label="Course / Field"
+                    name="course"
+                    rules={[{ required: true, message: "Please enter course" }]}
+                    style={{ marginBottom: 14 }}
+                  >
+                    <Input
+                      className="border border-gray-200!"
+                      classNames={{ input: "text-gray-700! font-sans!" }}
+                      prefix={<IdcardOutlined style={{ color: "#9ca3af" }} />}
+                      placeholder="e.g., Computer Science"
+                      disabled={submitting}
                     />
                   </Form.Item>
                 </Col>
@@ -232,98 +360,122 @@ const AddMembers = () => {
             </Col>
           </Row>
 
-          <Divider orientation="left">
-            <Text type="secondary">Education & Professional Information</Text>
-          </Divider>
+          <Divider style={{ margin: "4px 0 16px" }} />
 
           <Row gutter={16}>
-            <Col xs={24} md={12}>
-              <Form.Item
-                label="University / Institution"
-                name="university"
-                rules={[{ required: true, message: "Please enter your university" }]}
-              >
-                <Input 
-                  placeholder="e.g., University of Papua New Guinea" 
-                  size="large"
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} md={12}>
-              <Form.Item
-                label="Major / Field of Study"
-                name="major"
-                rules={[{ required: true, message: "Please enter your major" }]}
-              >
-                <Input 
-                  placeholder="e.g., Computer Science" 
-                  size="large"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col xs={24} md={12}>
+            <Col xs={24} md={8}>
               <Form.Item
                 label="Graduate Level"
                 name="graduate_level"
-                rules={[{ required: true, message: "Please select your graduate level" }]}
+                rules={[{ required: true, message: "Select level" }]}
+                style={{ marginBottom: 14 }}
               >
-                <Select placeholder="Select graduate level" size="large">
+                <Select
+                  placeholder="Select level"
+                  disabled={submitting}
+                  suffixIcon={<BookOutlined style={{ color: "#9ca3af" }} />}
+                >
                   <Option value="undergraduate">Undergraduate</Option>
                   <Option value="graduate">Graduate / Master's</Option>
                   <Option value="phd">PhD / Doctorate</Option>
                   <Option value="postdoc">Postdoctoral</Option>
-                  <Option value="professional">Professional / Working</Option>
+                  <Option value="professional">Professional</Option>
                 </Select>
               </Form.Item>
             </Col>
-            <Col xs={24} md={12}>
+
+            <Col xs={24} md={8}>
               <Form.Item
-                label="LinkedIn URL (Optional)"
-                name="linkedin_url"
-                rules={[
-                  { type: 'url', message: "Please enter a valid URL" }
-                ]}
+                label="City"
+                name="city"
+                rules={[{ required: true, message: "Please enter city" }]}
+                style={{ marginBottom: 14 }}
               >
-                <Input 
-                  prefix={<LinkedinOutlined />} 
-                  placeholder="https://linkedin.com/in/username" 
-                  size="large"
+                <Input
+                  className="border border-gray-200!"
+                  classNames={{ input: "text-gray-700! font-sans!" }}
+                  prefix={<EnvironmentOutlined style={{ color: "#9ca3af" }} />}
+                  placeholder="e.g., Wuhan"
+                  disabled={submitting}
+                />
+              </Form.Item>
+            </Col>
+
+            <Col xs={24} md={8}>
+              <Form.Item
+                label="LinkedIn (Optional)"
+                name="linkedin_url"
+                rules={[{ type: "url", message: "Enter a valid URL" }]}
+                style={{ marginBottom: 14 }}
+              >
+                <Input
+                  className="border border-gray-200!"
+                  classNames={{ input: "text-gray-700! font-sans!" }}
+                  prefix={<LinkedinOutlined style={{ color: "#9ca3af" }} />}
+                  placeholder="linkedin.com/in/..."
+                  disabled={submitting}
                 />
               </Form.Item>
             </Col>
           </Row>
 
           <Divider />
+          <Row gutter={[16, 16]}>
+            <Col xs={24}>
+              <Form.Item
+                label="Email Address"
+                name="email"
+                rules={[
+                  { required: true, message: "Please enter email" },
+                  { type: "email", message: "Enter a valid email" },
+                ]}
+                style={{ marginBottom: 14 }}
+              >
+                <Input
+                  className="border border-gray-200!"
+                  classNames={{ input: "text-gray-700! font-sans!" }}
+                  prefix={<MailOutlined style={{ color: "#9ca3af" }} />}
+                  placeholder="member@example.com"
+                  type="email"
+                  disabled={submitting}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Alert
+            type="info"
+            showIcon
+            icon={<SafetyCertificateOutlined />}
+            message="Your details will be added to the members directory."
+            style={{ marginBottom: 16, fontSize: 12 }}
+          />
 
           <Form.Item style={{ marginBottom: 0 }}>
-            <Space direction="vertical" style={{ width: '100%' }}>
-              <Alert
-                message="Important Information"
-                description="By submitting this form, you agree to become a member of the PNG Women in STEM Association and consent to our privacy policy."
-                type="info"
-                showIcon
-                style={{ marginBottom: 16 }}
-              />
-              <Button
-                type="primary"
-                htmlType="submit"
-                loading={uploading}
-                icon={uploading ? <UploadOutlined spin /> : <UserOutlined />}
-                size="large"
-                block
-                style={{ height: 48, fontSize: 16, borderRadius: 8 }}
-                disabled={uploading}
-              >
-                {uploading ? "Creating Profile..." : "Create Member Profile"}
-              </Button>
-            </Space>
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={submitting}
+              icon={submitting ? <LoadingOutlined /> : <UserOutlined />}
+              block
+              className="bg-orange-400! text-gray-100! border border-gray-200! hover:bg-orange-300!"
+              style={{ height: 36, fontSize: 15, borderRadius: 10 }}
+              disabled={submitting}
+            >
+              {submitting ? "Creating Member..." : "Create Member Profile"}
+            </Button>
           </Form.Item>
         </Form>
       </Card>
+
+      <ImageCropModal
+        open={cropOpen}
+        image={cropImage}
+        onCancel={handleCropCancel}
+        onConfirm={handleCropConfirm}
+      />
     </div>
+    </>
   );
 };
 

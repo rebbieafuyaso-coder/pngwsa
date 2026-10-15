@@ -11,16 +11,11 @@ import "swiper/css/effect-fade";
 
 export const TestimonialsCard = () => {
   return (
-    <div className="testimonials-container py-12 px-4 md:px-8 bg-gray-50">
+    <div className="testimonials-container py-12 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">
-          What Our Members Say
-        </h2>
-        <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
-          Hear from our members about their experiences with the PNG WSA community
-        </p>
 
         <Swiper
+          loop={true}
           modules={[Navigation, Pagination, Autoplay, EffectFade]}
           spaceBetween={30}
           slidesPerView={1}
@@ -41,7 +36,7 @@ export const TestimonialsCard = () => {
               spaceBetween: 20,
             },
             768: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 30,
             },
             1024: {
@@ -52,9 +47,9 @@ export const TestimonialsCard = () => {
           className="testimonials-swiper"
         >
           {Testimonials.map((testimonial) => (
-            <SwiperSlide key={testimonial.id}>
+            <SwiperSlide key={testimonial.id} className="mx-auto">
               <Card 
-                className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-none h-full flex flex-col min-h-6xl!"
+                className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-none h-full flex flex-col min-h-8xl! align-middle justify-center max-w-2xl"
                 style={{ borderRadius: '16px' }}
               >
                 <div className="flex-1">
@@ -97,12 +92,12 @@ export const TestimonialsCard = () => {
           .testimonials-swiper .swiper-button-next,
           .testimonials-swiper .swiper-button-prev {
             color: #f59e0b;
-            background: white;
-            width: 35px;
-            height: 35px;
+            background: transparent;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            padding: 10px;
           }
           .testimonials-swiper .swiper-button-next:hover,
           .testimonials-swiper .swiper-button-prev:hover {

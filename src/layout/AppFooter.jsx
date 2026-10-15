@@ -52,7 +52,7 @@ export default function AppFooter() {
   ];
 
   const memberLinks = [
-    { label: 'Member Login', path: '/coming-soon' },
+    { label: 'Member Login', path: '/members/login' },
     { label: 'Sign Up', path: '/members/register' },
     { label: 'Retrieve Account', path: '/coming-soon' },
   ];
@@ -98,11 +98,11 @@ export default function AppFooter() {
               {/* Contact Info */}
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2 text-gray-400">
-                  <FaMapMarkerAlt className="text-amber-400 flex-shrink-0" />
+                  <FaMapMarkerAlt className="text-amber-400 shrink-0" />
                   <span>Wuhan City, Hubei, China</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-400">
-                  <FaEnvelope className="text-amber-400 flex-shrink-0" />
+                  <FaEnvelope className="text-amber-400 shrink-0" />
                   <a
                     href="mailto:pngwsa.001@gmail.com"
                     className="hover:text-amber-400 transition-colors"
@@ -111,7 +111,7 @@ export default function AppFooter() {
                   </a>
                 </div>
                 <div className="flex items-center gap-2 text-gray-400">
-                  <FaPhone className="text-amber-400 flex-shrink-0" />
+                  <FaPhone className="text-amber-400 shrink-0" />
                   <a
                     href="tel:+8613072715926"
                     className="hover:text-amber-400 transition-colors"
