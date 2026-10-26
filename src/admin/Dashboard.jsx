@@ -19,11 +19,6 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
 };
 
-/* =========================================================
-   STAT CARD CONFIG
-   `table` is the Supabase table the count comes from.
-========================================================= */
-
 const STATS = [
   {
     key: "members",
@@ -69,10 +64,6 @@ const STATS = [
   },
 ];
 
-/* =========================================================
-   COMPONENT
-========================================================= */
-
 const Dashboard = () => {
   const [counts, setCounts] = useState({});
   const [loading, setLoading] = useState(true);
@@ -81,7 +72,6 @@ const Dashboard = () => {
     const fetchCounts = async () => {
       setLoading(true);
 
-      // Count rows in each table in parallel
       const results = await Promise.all(
         STATS.map(async (stat) => {
           const { count, error } = await supabase
@@ -89,7 +79,6 @@ const Dashboard = () => {
             .select("*", { count: "exact", head: true });
 
           if (error) {
-            // Tables that don't exist yet just show 0
             console.warn(`Count failed for ${stat.table}:`, error.message);
             return [stat.key, 0];
           }
@@ -107,70 +96,91 @@ const Dashboard = () => {
   return (
     <>
       <Helmet>
-        <title>PNG HSA | Admin Dashboard</title>
+        <title>Dashboard Admin | PNG HSA</title>
         <meta name="description" content="Admin Dashboard" />
       </Helmet>
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-    >
-      <motion.div variants={fadeUp} className="mb-6">
-        <Title level={3} className="mb-1!">
-          Dashboard
-        </Title>
-        <Text type="secondary">
-          Overview of your content across the association.
-        </Text>
-      </motion.div>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+        className="w-full"
+      >
+        {/* Header */}
+        <motion.div variants={fadeUp} className="mb-4 sm:mb-6 px-1">
+          <Title level={3} className="mb-1! text-xl sm:text-2xl md:text-3xl">
+            Dashboard
+          </Title>
+          <Text type="secondary" className="text-xs sm:text-sm">
+            Overview of your content across the association.
+          </Text>
+        </motion.div>
 
-      <Row gutter={[16, 16]}>
-        {STATS.map((stat) => (
-          <Col xs={24} sm={12} lg={8} key={stat.key}>
-            <motion.div variants={fadeUp}>
-              <Card
-                bordered={false}
-                className="rounded-2xl shadow-sm transition-shadow hover:shadow-md"
-              >
-                <div className="flex items-start justify-between">
-                  {loading ? (
-                    <Skeleton.Input active size="small" style={{ width: 120 }} />
-                  ) : (
-                    <Statistic
-                      title={
-                        <span className="text-sm text-slate-500">
-                          {stat.title}
-                        </span>
-                      }
-                      value={counts[stat.key] ?? 0}
-                    />
-                  )}
-                  <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-xl text-white ${stat.color}`}
-                  >
-                    {stat.icon}
+        {/* Stat cards grid */}
+        <Row gutter={[12, 12]} className="sm:!mx-0">
+          {STATS.map((stat) => (
+            <Col xs={12} sm={12} md={8} lg={8} xl={8} key={stat.key}>
+              <motion.div variants={fadeUp} className="h-full">
+                <Card
+                  bordered={false}
+                  className="rounded-xl sm:rounded-2xl shadow-sm transition-shadow hover:shadow-md h-full"
+                  styles={{ body: { padding: "14px" } }}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0 flex-1">
+                      {loading ? (
+                        <Skeleton.Input
+                          active
+                          size="small"
+                          style={{ width: "80%", minWidth: 60 }}
+                        />
+                      ) : (
+                        <Statistic
+                          title={
+                            <span className="text-xs sm:text-sm text-slate-500 block truncate">
+                              {stat.title}
+                            </span>
+                          }
+                          value={counts[stat.key] ?? 0}
+                          valueStyle={{
+                            fontSize: "clamp(1.1rem, 4vw, 1.5rem)",
+                            lineHeight: 1.2,
+                          }}
+                        />
+                      )}
+                    </div>
+                    <div
+                      className={`flex shrink-0 h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl text-white text-sm sm:text-base ${stat.color}`}
+                    >
+                      {stat.icon}
+                    </div>
                   </div>
-                </div>
-              </Card>
-            </motion.div>
-          </Col>
-        ))}
-      </Row>
+                </Card>
+              </motion.div>
+            </Col>
+          ))}
+        </Row>
 
-      <motion.div variants={fadeUp} className="mt-6">
-        <Card
-          bordered={false}
-          className="rounded-2xl shadow-sm"
-          title="Getting Started"
-        >
-          <ul className="list-disc space-y-2 pl-5 text-sm text-slate-600">
-            <li>Use the sidebar to manage members, executives, events, blogs, alumni, and gallery.</li>
-            <li>Each section has its own form — build them one at a time.</li>
-            <li>All content is stored in Supabase tables you create.</li>
-          </ul>
-        </Card>
+        {/* Getting Started */}
+        <motion.div variants={fadeUp} className="mt-4 sm:mt-6">
+          <Card
+            bordered={false}
+            className="rounded-xl sm:rounded-2xl shadow-sm"
+            title={
+              <span className="text-sm sm:text-base">Getting Started</span>
+            }
+            styles={{ body: { padding: "16px" } }}
+          >
+            <ul className="list-disc space-y-2 pl-4 sm:pl-5 text-xs sm:text-sm text-slate-600">
+              <li>
+                Use the sidebar to manage members, executives, events, blogs,
+                alumni, and gallery.
+              </li>
+              <li>Each section has its own form — build them one at a time.</li>
+              <li>All content is stored in Supabase tables you create.</li>
+            </ul>
+          </Card>
+        </motion.div>
       </motion.div>
-    </motion.div>
     </>
   );
 };

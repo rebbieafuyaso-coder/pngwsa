@@ -194,7 +194,7 @@ export default function Homepage() {
           >
             <motion.div variants={fadeUp} className="text-center mb-12">
               <h6 className="inline-block bg-amber-100 text-amber-700 px-4 py-1 rounded-full text-sm font-semibold mb-3">
-                Our Mission
+                Who Are We?
               </h6>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
                 Empowering PNG Students in Hubei
@@ -222,7 +222,7 @@ export default function Homepage() {
                   </p>
                 </motion.div>
                 <motion.div variants={fadeUp}>
-                  <h3 className="text-red-900 text-2xl font-medium text-center p-5">History</h3>
+                  <h3 className="text-red-900 text-2xl font-bold text-center p-5">History</h3>
                   <p className="text-base text-gray-700 leading-relaxed">
                     The association was founded in <strong>2014</strong> in <strong>Wuhan City, Hubei Province, China</strong> under the name <b>PNG Wuhan Students Association</b>.
                     It was founded with the sole purpose of uniting PNG students across Wuhan to help and support one another.

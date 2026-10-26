@@ -62,7 +62,7 @@ const AdminLogin = () => {
   return (
     <>
       <Helmet>
-        <title>PNG HSA | Admin Login</title>
+        <title>Admin Login | PNG HSA</title>
         <meta name="description" content="Log in as admin for PNGHSA." />
       </Helmet>
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 p-4">

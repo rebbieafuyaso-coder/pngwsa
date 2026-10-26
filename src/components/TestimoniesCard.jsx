@@ -74,7 +74,9 @@ export const TestimonialsCard = () => {
         .testimonials-swiper {
           padding-bottom: 45px;
           width: 100%;
-          overflow: hidden;
+          justify-content: center;
+          display: flex;
+          align-items: center;
         }
 
         .testimonials-swiper .swiper-wrapper {
@@ -89,16 +91,16 @@ export const TestimonialsCard = () => {
         .testimonials-swiper .swiper-slide .ant-card {
           width: 100%;
           height: 100%;
+          padding: 45px;
         }
 
         .testimonials-swiper .swiper-button-next,
         .testimonials-swiper .swiper-button-prev {
           color: #f59e0b;
-          background: white;
+          background: transparent;
           width: 34px;
           height: 34px;
           border-radius: 50%;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
           transition: all 0.3s ease;
         }
 

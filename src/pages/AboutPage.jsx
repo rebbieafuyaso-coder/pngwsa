@@ -18,6 +18,9 @@ import HeroComponent from "../components/HeroComponent";
 import { HeroData, MissionCards } from "../data/BlogData";
 import { executiveProfile } from "../data/executivesProfile";
 import ExecutiveCards from "../components/ExecutiveCards";
+import { supabase } from "../supabaseClient";
+import { useEffect, useState } from "react";
+import HistorySection from "../components/HistorySection";
 
 // Animation variants
 const fadeUp = {
@@ -34,6 +37,16 @@ const stagger = {
 };
 
 export default function AboutPage() {
+  const [executives, setExecutives] = useState();
+  const [executiveLoading, setExecutivesLoading] = useState(false);
+  /*=====================================================
+  Executives Fetched from the database
+  ======================================================= */
+  useEffect(() => {
+    let cancelled = true;
+    const fetchExecutives = async () => {
+    }
+  })
 
   // Alumni Data
   const alumni = [
@@ -223,8 +236,8 @@ export default function AboutPage() {
               className="mt-8 max-w-6xl mx-auto p-6 md:p-8 bg-amber-50 rounded-2xl border-l-4 border-amber-500 shadow-2xl"
             >
               <FaQuoteLeft className="text-amber-400 text-3xl mb-3" />
-              <p className="text-lg md:text-xl text-gray-700">
-                "Founded in 2011, the PNG Wuhan Students Association has grown to
+              <p className="text-lg md:text-base text-gray-700">
+                "Founded in 2014, the PNG Wuhan Students Association has grown to
                 support over 120+ students across Wuhan's top universities since it's establishment."
               </p>
             </motion.div>
@@ -258,6 +271,8 @@ export default function AboutPage() {
             })}
           </Row>
         </section>
+        {/* History */}
+        <HistorySection />
 
         {/* Mission Cards */}
         <section className="py-16 px-4 md:px-16">

@@ -11,6 +11,7 @@ import {
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  CrownOutlined,
 } from "@ant-design/icons";
 import { useAuth } from "../auth/AuthContext";
 
@@ -19,6 +20,8 @@ const { Text } = Typography;
 
 const MENU_ITEMS = [
   { key: "/admin/dashboard", icon: <DashboardOutlined />, label: "Dashboard" },
+  { key: "/admin/members", icon: <UserOutlined />, label: "Members" },
+  { key: "/admin/executives", icon: <CrownOutlined />, label: "Executives" },
   { key: "/admin/events", icon: <CalendarOutlined />, label: "Events" },
   { key: "/admin/blogs", icon: <FileTextOutlined />, label: "Blogs" },
   { key: "/admin/alumni", icon: <TeamOutlined />, label: "Alumni" },

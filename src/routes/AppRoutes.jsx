@@ -26,6 +26,9 @@ import Events from "../admin/Events";
 import Blogs from "../admin/Blogs";
 import Alumni from "../admin/Alumni";
 import Gallery from "../admin/Gallery";
+import Members from "../admin/Members";
+import Executives from "../admin/Executives";
+import GalleryPage from "../pages/GalleryPage";
 
 export default function AppRoutes() {
   return (
@@ -47,6 +50,7 @@ export default function AppRoutes() {
             <Route path="/events/:link" element={<EventDetailsModal />} />
             <Route path="/blogs" element={<ComingSoon />} />
             <Route path="/blogs/:link" element={<BlogDetails />} />
+            <Route path="/gallery" element={<GalleryPage />} />
 
             <Route path="/members/register" element={<AddMembers />} />
             <Route path="/members/login" element={<AuthPage />} />
@@ -78,6 +82,8 @@ export default function AppRoutes() {
             <Route path="blogs" element={<Blogs />} />
             <Route path="alumni" element={<Alumni />} />
             <Route path="gallery" element={<Gallery />} />
+            <Route path="members" element={<Members />} />
+            <Route path="executives" element={<Executives />} />
           </Route>
         </Routes>
       </BrowserRouter>
